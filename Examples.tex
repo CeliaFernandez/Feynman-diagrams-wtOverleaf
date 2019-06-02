@@ -1,0 +1,212 @@
+
+%%%%%%%%%%%%%%%%%%%%%% FEYNMAN DIAGRAM EXAMPLES
+
+\documentclass{article}
+\usepackage{feynmp-auto}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\thispagestyle{empty}
+
+
+%%%%%% Custom commands (to define certain particles easily)
+\def\MainQuark{t}
+\def\chiz{$\mathrm{\widetilde{\chi}^0_1}$}
+\def\chitz{$\mathrm{\widetilde{\chi}^0_{2}}$}
+\def\chipm{$\mathrm{\widetilde{\chi}^\pm_{1}}$}
+\def\chimp{$\mathrm{\widetilde{\chi}^\mp_{1}}$}
+\def\sGlu{$\mathrm{\widetilde{g}}$}
+\def\sQ{$\mathrm{\widetilde{q}}$}
+\def\sQb{$\mathrm{\overline{\widetilde{q}}}$}
+\def\sBot{$\mathrm{\widetilde{b}_1}$}
+\def\sBotb{$\mathrm{\overline{\widetilde{b}}_1}$}
+\def\sTop{$\mathrm{\widetilde{t}_1}$}
+\def\sTopb{$\mathrm{\overline{\widetilde{t}}_1}$}
+\def\sTopt{$\mathrm{\widetilde{t}_2}$}
+\def\sToptb{$\mathrm{\overline{\widetilde{t}}_2}$}
+\def\sGra{$\mathrm{\widetilde{G}}$}
+\def\PH{$\mathrm{H}$}
+\def\PZ{$\mathrm{Z}$}
+\def\PW{$\mathrm{W^\pm}$}
+\def\Ph{$\mathrm{h}$}
+\def\sLep{$\widetilde{\ell}$}
+\def\sNu{$\widetilde{\nu}$}
+\def\sTau{$\widetilde{\tau}$}
+\newcommand{\anti}[1]{$\mathrm{\overline{#1}}$}
+
+
+%%%%%%%% FIRST EXAMPLE: Longlived Higgs boson model %%%%%%%%%%%%%%%
+
+\begin{figure}
+\centering
+
+\begin{fmffile}{FeynmanH2XX24l}
+\begin{fmfgraph*}(180,90) %\fmfpen{thick}
+  \fmfset{arrow_len}{cm}\fmfset{arrow_ang}{0}
+  
+  %%%%%%%%%%%% Specifying number of inputs/outputs
+  \fmfleftn{i}{2}
+  \fmfrightn{o}{4} % the four leptons
+  
+  %%%%%%%%%%%% Specifying the labels of the inputs (none)
+  \fmflabel{}{i1}
+  \fmflabel{}{i2}
+    
+  %%%%%%%%%%%% Incoming protons (one line)
+  \fmf{fermion,  tension=2., lab=p, label.side=right}{v1,i1}
+  \fmf{fermion,  tension=2., lab=p, label.side=left}{v1,i2}
+           
+  %%%%%%%%%%%% Produced scalar bosons
+  \fmf{dashes, label=H, label.side=left}{v1,v2}
+  \fmf{dashes, label=X, label.side=left}{v2,v3}
+  \fmf{dashes, label=X, label.side=right}{v2,v4}
+
+  %%%%%%%%%%%%% Decays and vertex circles
+  
+  %% Decay of the first X boson
+  \fmf{fermion}{v3,o4} 
+  \fmflabel{$\ell^{+}$}{o4} 
+
+  \fmf{fermion}{v3,o3}
+  \fmflabel{$\ell^{-}$}{o3}
+
+  %% Decay of the second X boson
+  \fmf{fermion}{v4,o1}
+  \fmflabel{$\ell^{+}$}{o1}
+ 
+  \fmf{fermion}{v4,o2}
+  \fmflabel{$\ell^{-}$}{o2}
+
+  %% Vertex circles (put a dot in lepton vertex)
+  \fmfdot{v3,v4}
+           
+  %%%%%%%%%%%% Additional lines on incoming protons and blob
+  \input{shared/protons.tex}
+
+\end{fmfgraph*}
+\end{fmffile} 
+    \vspace{0.3cm}
+    \caption{Longlived scalar Higgs diagram}
+    \label{fig:H2XX24l}
+\end{figure}
+
+
+%%%%%%%% SECOND EXAMPLE: Stop to top and neutralino %%%%%%%%%%%%%%%
+
+\begin{figure}
+\centering
+
+\begin{fmffile}{FeynmanT2tt}
+
+\begin{fmfgraph*}(180,90) %\fmfpen{thick}
+  \fmfset{arrow_len}{cm}\fmfset{arrow_ang}{0}
+  
+  %%%%%%%%%%%% Specifying number of inputs/outputs
+  \fmfleftn{i}{2}
+  \fmfrightn{o}{4}
+  \fmflabel{}{i1}
+  \fmflabel{}{i2}
+    
+  %%%%%%%%%%%% Incoming protons (one line)
+  \fmf{fermion,  tension=2., lab=p, label.side=right}{v1,i1}
+  \fmf{fermion,  tension=2., lab=p, label.side=left}{v1,i2}
+           
+  %%%%%%%%%%%% Produced SUSY particles
+  \fmf{dashes, label=\sTop, label.side=left}{v1,v3}
+  \fmf{dashes, label=\sTopb, label.side=right}{v1,v2}
+
+  %%%%%%%%%%%%% Decays and vertex circles
+  \fmf{fermion}{v3,o4} 
+  \fmflabel{\MainQuark}{o4}
+
+  \fmf{dots}{v3,o3}
+  \fmflabel{\chiz}{o3}
+
+  %% 2nd decay
+  \fmf{fermion}{v2,o1}
+  \fmflabel{$\mathrm{\overline{\MainQuark}}$}{o1}
+ 
+  \fmf{dots}{v2,o2}
+  \fmflabel{\chiz}{o2}
+
+  %% Vertex circles
+  \fmfdot{v2,v3}
+           
+  %%%%%%%%%%%% Additional lines on incoming protons and blob
+  \input{shared/protons.tex}
+
+\end{fmfgraph*}
+       
+\end{fmffile} 
+
+    \vspace{0.3cm}
+    \caption{Supersymmetric stop $\tilde{t}$ to top quark $t$ and neutralino $\tilde{\chi}_1^0$}
+    \label{fig:T2tt}
+\end{figure}
+
+
+
+%%%%%%%% THIRD EXAMPLE: Longlived squark production %%%%%%%%%%%%%%%
+
+\begin{figure}
+    \centering
+
+    \begin{fmffile}{FeynmanSq2qChi2llnu}
+    \begin{fmfgraph*}(180,90) %\fmfpen{thick}
+      \fmfset{arrow_len}{cm}\fmfset{arrow_ang}{0}
+      
+      %%%%%%%%%%%% Specifying number of inputs/outputs
+      \fmfleftn{i}{2}
+      \fmfrightn{o}{8}
+      \fmflabel{}{i1}
+      \fmflabel{}{i2}
+        
+      %%%%%%%%%%%% Incoming protons (one line)
+      \fmf{fermion,  tension=2., lab=p, label.side=right}{v1,i1}
+      \fmf{fermion,  tension=2., lab=p, label.side=left}{v1,i2}
+               
+      %%%%%%%%%%%% Squark path
+      \fmf{dashes, lab=$\bar{\tilde{q}}$, label.side=right}{v1,v2}
+      \fmf{dashes, lab=$\tilde{q}$, label.side=left}{v1,v3}
+    
+      %%%%%%%%%%%%% Quark final product
+      \fmf{fermion}{v2,o1}
+      \fmf{fermion}{v3,o8}
+      \fmflabel{$q$}{o8}
+      \fmflabel{$\bar{q}$}{o1}
+    	
+      %%%%%%%%%%%%% Neutralino path
+      \fmf{dots, lab=$\tilde{\chi}_1^0$, label.side=left}{v2,v4}
+      \fmf{dots, lab=$\tilde{\chi}_1^0$, label.side=right}{v3,v5}
+    
+      %%%%%%%%%%%%% 1st decay
+      \fmf{fermion}{v4,o2}
+      \fmf{fermion}{v4,o3}
+      \fmf{fermion}{v4,o4}
+      \fmflabel{$\ell^+$}{o2}
+      \fmflabel{$\ell^-$}{o3}
+      \fmflabel{$\nu$}{o4}
+    
+      %%%%%%%%%%%%% 2nd decay
+      \fmf{fermion}{v5,o5}
+      \fmf{fermion}{v5,o6}
+      \fmf{fermion}{v5,o7}
+      \fmflabel{$\nu$}{o5}
+      \fmflabel{$\ell^-$}{o6}
+      \fmflabel{$\ell^+$}{o7}
+    
+      %% Vertex circles
+      \fmfdot{v4,v5}
+               
+      %%%%%%%%%%%% Additional lines on incoming protons and blob
+      \input{shared/protons.tex}
+    
+    \end{fmfgraph*}
+    \end{fmffile} 
+    
+    \caption{Longlived squark production}
+    \label{fig:Sq2qChi2llnu}
+\end{figure}
+
+
+\end{document}
